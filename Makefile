@@ -6,7 +6,7 @@
 #    By: aputman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/09 16:38:05 by aputman           #+#    #+#              #
-#    Updated: 2016/05/12 10:37:24 by aputman          ###   ########.fr        #
+#    Updated: 2016/06/07 14:13:43 by aputman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRC =	fractol.c\
 		mlx.c\
 		mandelbrot.c\
 		julia.c\
+		burningship.c\
+		keycode.c\
 		trucutile.c
 
 OBJ =	$(SRC:.c=.o)
@@ -30,10 +32,12 @@ $(NAME):
 	make -C libft
 	gcc -c $(FLG) $(SRC)
 	gcc -o $(NAME) $(OBJ) $(LIB) -lmlx -framework AppKit -framework OpenGL
+	mkdir obj
+	mv $(OBJ) obj
 
 clean:
 	make clean -C libft
-	rm -f $(OBJ)
+	rm -rf obj
 
 fclean: clean
 	make fclean -C libft

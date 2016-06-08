@@ -6,7 +6,7 @@
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 05:06:46 by aputman           #+#    #+#             */
-/*   Updated: 2016/05/12 13:13:06 by aputman          ###   ########.fr       */
+/*   Updated: 2016/06/08 16:03:23 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct		s_env
 	char			mode;
 	int				win_x;
 	int				win_y;
+	int				mouse_x;
+	int				mouse_y;
 	double			pos_x;
 	double			pos_y;
 	int				zoom;
@@ -39,22 +41,27 @@ typedef struct		s_fract
 {
 	int				x;
 	int				y;
-	double			RC;
-	double			IC;
+	double			rc;
+	double			ic;
 }					t_fract;
 
 typedef struct		s_color
 {
-	int				r;
-	int				g;
-	int				b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }					t_color;
 
 void				mlx_env_init(t_env *env);
-void				draw_pixel(t_env env, int x, int y, t_color *color);
-void				draw_mode(t_env env, char mode);
-void				mandelbrot(t_env env);
-void				julia(t_env env);
-void				change_color(t_env env, t_color *color, int a);
+int					input_manager(t_env *env, int keycode);
+
+void				mandelbrot(t_env *env);
+void				julia(t_env *env);
+void				burningship(t_env *env);
+void				draw_mode(t_env *env, char mode);
+void				draw_pixel(t_env *env, int x, int y, t_color *color);
+
+void				change_color(t_env *env, t_color *color, int a);
+void				put_overlay(t_env *e);
 
 #endif

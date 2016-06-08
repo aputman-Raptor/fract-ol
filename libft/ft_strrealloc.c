@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trucutile.c                                        :+:      :+:    :+:   */
+/*   ft_strrealloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/12 06:29:14 by aputman           #+#    #+#             */
-/*   Updated: 2016/06/08 16:02:53 by aputman          ###   ########.fr       */
+/*   Created: 2016/06/07 14:56:27 by aputman           #+#    #+#             */
+/*   Updated: 2016/06/07 15:08:33 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-void	change_color(t_env *e, t_color *color, int a)
+char		*ft_strrealloc(char *str, int size)
 {
-	if (a == (e->iter - 1))
-	{
-		color->r = 0;
-		color->g = 0;
-		color->b = 0;
-	}
-	else
-	{
-		color->r = (unsigned char)0xFFFFFF / e->iter * a + (a / 0xFFFFFF) + 20;
-		color->g = (unsigned char)0xFFFFFF / e->iter * (a % 0xFFFFFF) + 20;
-		color->b = (unsigned char)0xFFFFFF / e->iter * a + (a % 0xFFFFFF) + 40;
-	}
+	char	*tmp;
+
+	if (!(tmp = ft_strnew(ft_strlen(str) + 1)))
+		return (NULL);
+	ft_strcpy(tmp, str);
+	free(str);
+	if (!(str = ft_strnew(ft_strlen(tmp) + 1 + size)))
+		return (NULL);
+	ft_strcpy(str, tmp);
+	free(tmp);
+	return (str);
 }

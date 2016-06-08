@@ -6,7 +6,7 @@
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 13:33:51 by aputman           #+#    #+#             */
-/*   Updated: 2016/04/11 15:12:21 by aputman          ###   ########.fr       */
+/*   Updated: 2016/06/07 15:09:09 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*ft_strrealloc(char *str, int size);
 int					get_next_line(const int fd, char **line);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);

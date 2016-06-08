@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/05/12 09:37:01 by aputman           #+#    #+#             */
-/*   Updated: 2016/06/07 14:16:56 by aputman          ###   ########.fr       */
+/*   Created: 2016/05/12 05:34:21 by aputman           #+#    #+#             */
+/*   Updated: 2016/06/07 14:17:18 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	fract_j(t_env *env, t_fract fr)
+static void	fract_bs(t_env *env, t_fract fr)
 {
 	double	rn1;
 	double	in1;
@@ -20,16 +20,17 @@ static void	fract_j(t_env *env, t_fract fr)
 	double	in;
 	int		a;
 
-	rn1 = 1.5 * (fr.x - env->win_x / 2) / (0.5 * env->zoom * env->win_x) +
-		env->pos_x;
-	in1 = (fr.y - env->win_y / 2) / (0.5 * env->zoom * env->win_y) + env->pos_y;
+	rn1 = 0;
+	in1 = 0;
+	rn = 0;
+	in = 0;
 	a = -1;
 	while (++a < (env->iter - 1))
 	{
 		rn = rn1;
 		in = in1;
-		rn1 = (rn * rn) - (in * in) + fr.rc;
-		in1 = 2 * rn * in + fr.ic;
+		rn1 = rn * rn - in * in + fr.rc;
+		in1 = 2 * fabs(rn * in) + fr.ic;
 		if ((rn1 * rn1 + in1 * in1) > 4)
 			break ;
 	}
@@ -38,19 +39,23 @@ static void	fract_j(t_env *env, t_fract fr)
 		draw_pixel(env, fr.x, fr.y, env->color);
 }
 
-void		julia(t_env *env)
+void		burningship(t_env *env)
 {
 	t_fract	fr;
 
 	env->img = mlx_new_image(env->mlx, env->win_x, env->win_y);
-	fr.rc = -5.0 + ((8.0 / env->win_x) * env->mouse_x);
-	fr.ic = -5.0 + ((10.0 / env->win_y) * env->mouse_y);
 	fr.y = -1;
 	while (++fr.y < env->win_y)
 	{
 		fr.x = -1;
 		while (++fr.x < env->win_x)
-			fract_j(env, fr);
+		{
+			fr.rc = 2.0 * (fr.x - env->win_x / 2) / (0.5 * env->zoom *
+					env->win_x) + env->pos_x;
+			fr.ic = (fr.y - env->win_y / 2) / (0.5 * env->zoom * env->win_y)
+				+ env->pos_y;
+			fract_bs(env, fr);
+		}
 	}
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	mlx_destroy_image(env->mlx, env->img);

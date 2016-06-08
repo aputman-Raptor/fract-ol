@@ -6,7 +6,7 @@
 #    By: aputman <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/04 14:40:25 by aputman           #+#    #+#              #
-#    Updated: 2016/04/09 16:25:10 by aputman          ###   ########.fr        #
+#    Updated: 2016/06/07 15:09:27 by aputman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,8 @@ SRC= ft_atoi.c\
 	 ft_strtrim.c\
 	 ft_tolower.c\
 	 ft_toupper.c\
-	 get_next_line.c
+	 get_next_line.c\
+	 ft_strrealloc.c
 
 OBJ=$(SRC:.c=.o)
 
