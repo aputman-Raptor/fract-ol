@@ -50,8 +50,8 @@ void		mandelbrot(t_env *env)
 		fr.x = -1;
 		while (++fr.x < env->win_x)
 		{
-			fr.rc = 2.0 * (fr.x - env->win_x / 2) / (0.5 * env->zoom *
-					env->win_x) + env->pos_x;
+			fr.rc = 2.0 * (fr.x - env->win_x / 2) / (env->zoom *
+					env->win_x / 2) + env->pos_x;
 			fr.ic = (fr.y - env->win_y / 2) / (0.5 * env->zoom * env->win_y)
 				+ env->pos_y;
 			fract_m(env, fr);
