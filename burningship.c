@@ -6,7 +6,7 @@
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 05:34:21 by aputman           #+#    #+#             */
-/*   Updated: 2016/06/07 14:17:18 by aputman          ###   ########.fr       */
+/*   Updated: 2016/08/14 16:00:26 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ static void	fract_bs(t_env *env, t_fract fr)
 		if ((rn1 * rn1 + in1 * in1) > 4)
 			break ;
 	}
-	change_color(env, env->color, a);
-	if ((fr.x >= 0 && fr.x < env->win_x) && (fr.y >= 0 && fr.y < env->win_y))
+	get_color_palette(env, env->color, a, env->pal);
+	if ((fr.x >= 0 && fr.x < env->win_x) && (fr.y >= 0 && fr.y < env->win_y)
+			&& a < (env->iter - 1))
 		draw_pixel(env, fr.x, fr.y, env->color);
 }
 

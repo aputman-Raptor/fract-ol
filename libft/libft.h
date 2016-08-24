@@ -6,7 +6,7 @@
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 13:33:51 by aputman           #+#    #+#             */
-/*   Updated: 2016/06/07 15:09:09 by aputman          ###   ########.fr       */
+/*   Updated: 2016/07/16 18:22:42 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 # define BUFF_SIZE 64
 

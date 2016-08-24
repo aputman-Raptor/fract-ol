@@ -6,7 +6,7 @@
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 05:08:26 by aputman           #+#    #+#             */
-/*   Updated: 2016/06/08 15:41:09 by aputman          ###   ########.fr       */
+/*   Updated: 2016/08/23 17:24:14 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,24 @@ void		draw_pixel(t_env *env, int x, int y, t_color *color)
 void		draw_mode(t_env *env, char mode)
 {
 	if (mode == 'M')
-		mandelbrot(env);
+		mandelbrot(&(*env));
 	else if (mode == 'J')
-		julia(env);
+		julia(&(*env));
 	else if (mode == 'B')
-		burningship(env);
-	else
-		exit(0);
+		burningship(&(*env));
 }
 
 int			main(int argc, char **argv)
 {
 	t_env	*env;
 
-	if (argc < 2)
-		return (-1);
+	if (argc != 2)
+		arg_error(argc);
 	if (!(env = (t_env *)ft_memalloc(sizeof(t_env))))
 		return (-1);
 	if ((ft_strcmp("mandelbrot", argv[1])) && (ft_strcmp("julia", argv[1]))
 				&& (ft_strcmp("burningship", argv[1])))
-		return (-1);
+		return (arg_error(argc));
 	mlx_env_init(&(*env));
 	if (!(ft_strcmp("mandelbrot", argv[1])))
 		env->mode = 'M';
@@ -53,6 +51,7 @@ int			main(int argc, char **argv)
 	else if (!(ft_strcmp("burningship", argv[1])))
 		env->mode = 'B';
 	draw_mode(env, env->mode);
+	helper();
 	mlx_loop(env->mlx);
 	return (0);
 }

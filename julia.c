@@ -6,7 +6,7 @@
 /*   By: aputman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/12 09:37:01 by aputman           #+#    #+#             */
-/*   Updated: 2016/06/07 14:16:56 by aputman          ###   ########.fr       */
+/*   Updated: 2016/08/14 15:54:37 by aputman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	fract_j(t_env *env, t_fract fr)
 	double	in;
 	int		a;
 
-	rn1 = 1.5 * (fr.x - env->win_x / 2) / (0.5 * env->zoom * env->win_x) +
+	rn1 = 2.0 * (fr.x - env->win_x / 2) / (0.5 * env->zoom * env->win_x) +
 		env->pos_x;
 	in1 = (fr.y - env->win_y / 2) / (0.5 * env->zoom * env->win_y) + env->pos_y;
 	a = -1;
@@ -33,8 +33,9 @@ static void	fract_j(t_env *env, t_fract fr)
 		if ((rn1 * rn1 + in1 * in1) > 4)
 			break ;
 	}
-	change_color(env, env->color, a);
-	if ((fr.x >= 0 && fr.x < env->win_x) && (fr.y >= 0 && fr.y < env->win_y))
+	get_color_palette(env, env->color, a, env->pal);
+	if ((fr.x >= 0 && fr.x < env->win_x) && (fr.y >= 0 && fr.y < env->win_y)
+			&& a < (env->iter - 1))
 		draw_pixel(env, fr.x, fr.y, env->color);
 }
 
